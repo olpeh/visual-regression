@@ -48,12 +48,15 @@ function compareScreenshots(testDir, route, filePrefix, goldenDir) {
                     threshold: 0.5
                 });
 
-            // Save the visual diff file
-            diff.pack().pipe(fs.createWriteStream(`${testDir}/${route}/${filePrefix}.diff.png`));
+            // Save the visual diff file if changed more than the limit
+            const pixelLimit = 50000;
+            if (numDiffPixels >= pixelLimit) {
+                diff.pack().pipe(fs.createWriteStream(`${testDir}/${route}/${filePrefix}.diff.png`));
+            }
 
             // The files should look about the same
             // Threshold and pixel amount are just random numbers right now
-            expect(numDiffPixels, 'number of different pixels').lessThan(50000);
+            expect(numDiffPixels, 'number of different pixels').lessThan(pixelLimit);
             resolve();
         }
     });
