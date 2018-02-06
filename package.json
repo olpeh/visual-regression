@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Visual testing tool",
   "scripts": {
-    "start": "mocha test/ --timeout 20000",
-    "test": "mocha test/ --timeout 20000",
-    "firstrun": "mocha test/ --timeout 20000 --firstrun"
+    "start": "mocha test/ --timeout 35000",
+    "test": "mocha test/ --timeout 35000",
+    "firstrun": "mocha test/ --timeout 35000 --firstrun"
   },
   "author": "Olavi Haapala",
   "license": "MIT",

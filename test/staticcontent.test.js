@@ -28,45 +28,48 @@ console.log(`Going to run tests for ${env} ${product}`);
 //    \__________/\__________/\__________/\____________...
 //       "tiny"      "small"    "medium"      "large"
 //       <-480       481-768    769-1024       1025->
+
+// Probably stupid to use a "big enough height" here...
+const height = 15000;
 const viewportConfigs = [{
         width: 380,
-        height: 6000
+        height
     },
     {
         width: 480,
-        height: 6000
+        height
     },
     {
         width: 481,
-        height: 6000
+        height
     },
     {
         width: 768,
-        height: 6000
+        height
     },
     {
         width: 769,
-        height: 6000
+        height
     },
     {
         width: 1024,
-        height: 6000
+        height
     },
     {
         width: 1025,
-        height: 6000
+        height
     },
     {
         width: 1280,
-        height: 6000
+        height
     },
     {
         width: 1600,
-        height: 6000
+        height
     },
     {
         width: 1920,
-        height: 6000
+        height
     }
 ];
 

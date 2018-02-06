@@ -14,7 +14,7 @@ async function takeAndCompareScreenshot({
 }) {
     // Start the browser, go to that page, and take a screenshot.
     await page.goto(`${baseUrl}/${route}`);
-    // Get the "viewport" of the page, as reported by the page.
+
     await page.screenshot({
         path: `${testDir}/${route}/${filePrefix}.png`
     });
