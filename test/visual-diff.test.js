@@ -36,7 +36,7 @@ console.log({
 //       <-480       481-768    769-1024       1025->
 
 // Probably stupid to use a "big enough height" here...
-const height = 15000;
+const height = 2500;
 const viewportConfigs = [
   {
     width: 380,
@@ -82,17 +82,32 @@ const viewportConfigs = [
 
 describe('👀 screenshots are correct', () => {
   let browser, page;
-  let currentPath = 'frontpage';
+  let toBeTested = testPaths.map((path) => {
+    const folderName =
+      path === '/'
+        ? 'frontpage'
+        : path.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    return {
+      path,
+      folderName
+    };
+  });
 
   // This is ran when the suite starts up.
   before(async function() {
     // Create the test directory if needed. This and the goldenDir
     // variables are global somewhere.
-    if (!fs.existsSync(testDir)) fs.mkdirSync(testDir);
-
-    if (!fs.existsSync(`${testDir}/${currentPath}`)) {
-      fs.mkdirSync(`${testDir}/${currentPath}`);
+    if (!fs.existsSync(testDir)) {
+      fs.mkdirSync(testDir);
     }
+
+    console.log({ toBeTested });
+
+    toBeTested.forEach((t) => {
+      if (!fs.existsSync(`${testDir}/${t.folderName}`)) {
+        fs.mkdirSync(`${testDir}/${t.folderName}`);
+      }
+    });
   });
 
   // This is ran before every test. It's where you start a clean browser.
@@ -105,11 +120,7 @@ describe('👀 screenshots are correct', () => {
   afterEach(() => browser.close());
 
   describe('Screenshots are visually similar on all breakpoints including edge cases', () => {
-    testPaths.forEach((route) => {
-      currentPath =
-        route === '/'
-          ? 'frontpage'
-          : route.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    toBeTested.forEach((t) => {
       viewportConfigs.forEach((viewportConfig) => {
         const filePrefix = `${viewportConfig.width}x${viewportConfig.height}`;
         it(`looks correct with screen size: ${filePrefix}`, () => {
@@ -122,7 +133,8 @@ describe('👀 screenshots are correct', () => {
           return screenshot.takeAndCompareScreenshot({
             page,
             baseUrl: fullBaseUrl,
-            route,
+            route: t.path,
+            folderName: t.folderName,
             filePrefix,
             testDir,
             goldenDir
