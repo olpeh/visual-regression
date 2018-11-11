@@ -1,37 +1,34 @@
-const fs = require('fs'),
-  expect = require('chai').expect,
-  PNG = require('pngjs').PNG,
-  pixelmatch = require('pixelmatch');
+import { createReadStream, createWriteStream } from 'fs';
+import { expect } from 'chai';
+import { PNG } from 'pngjs';
+import * as pixelmatch from 'pixelmatch';
 
-// Named function parameters in JS - YAY!
-async function takeAndCompareScreenshot({
+export const takeScreenshot = async (
   page,
-  baseUrl,
-  route,
-  folderName,
-  filePrefix,
-  testDir,
-  goldenDir
-}) {
-  // Start the browser, go to that page, and take a screenshot.
-  await page.goto(`${baseUrl}/${route}`);
-
+  screenshotDirPath: string,
+  folderName: string,
+  filePrefix: string
+) => {
   await page.screenshot({
-    path: `${testDir}/${folderName}/${filePrefix}.png`
+    path: `${screenshotDirPath}/${folderName}/${filePrefix}.png`
   });
+};
 
-  // Test to see if it's right.
-  return compareScreenshots(testDir, folderName, filePrefix, goldenDir);
-}
-
-function compareScreenshots(testDir, folderName, filePrefix, goldenDir) {
+export const compareScreenshots = (
+  screenshotDirPath: string,
+  folderName: string,
+  filePrefix: string,
+  goldenDir: string
+) => {
   return new Promise((resolve, reject) => {
-    const img1 = fs
-      .createReadStream(`${testDir}/${folderName}/${filePrefix}.png`)
+    const img1 = createReadStream(
+      `${screenshotDirPath}/${folderName}/${filePrefix}.png`
+    )
       .pipe(new PNG())
       .on('parsed', doneReading);
-    const img2 = fs
-      .createReadStream(`${goldenDir}/${folderName}/${filePrefix}.png`)
+    const img2 = createReadStream(
+      `${goldenDir}/${folderName}/${filePrefix}.png`
+    )
       .pipe(new PNG())
       .on('parsed', doneReading);
 
@@ -67,8 +64,8 @@ function compareScreenshots(testDir, folderName, filePrefix, goldenDir) {
         diff
           .pack()
           .pipe(
-            fs.createWriteStream(
-              `${testDir}/${folderName}/${filePrefix}.diff.png`
+            createWriteStream(
+              `${screenshotDirPath}/${folderName}/${filePrefix}.diff.png`
             )
           );
       }
@@ -79,8 +76,4 @@ function compareScreenshots(testDir, folderName, filePrefix, goldenDir) {
       resolve();
     }
   });
-}
-
-module.exports = {
-  takeAndCompareScreenshot
 };

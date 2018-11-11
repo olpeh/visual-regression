@@ -1,6 +1,6 @@
-# puppeteer-visual-diff
+# visual-regression
 
-Test website for visual diff on different viewport sizes using Puppeteer
+Test websites for visual regressions on different viewport sizes using Puppeteer.
 
 Inspired by [this blog post](https://meowni.ca/posts/2017-puppeteer-tests/) by [Monica Dinculescu](https://github.com/notwaldorf).
 
