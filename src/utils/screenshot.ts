@@ -19,8 +19,8 @@ export const compareScreenshots = (
   folderName: string,
   filePrefix: string,
   goldenDir: string
-) => {
-  return new Promise((resolve, reject) => {
+) =>
+  new Promise((resolve, reject) => {
     const img1 = createReadStream(
       `${screenshotDirPath}/${folderName}/${filePrefix}.png`
     )
@@ -36,7 +36,9 @@ export const compareScreenshots = (
 
     function doneReading() {
       // Wait until both files are read.
-      if (++filesRead < 2) return;
+      if (++filesRead < 2) {
+        return;
+      }
 
       // The files should be the same size.
       expect(img1.width, 'image widths are the same').equal(img2.width);
@@ -76,4 +78,3 @@ export const compareScreenshots = (
       resolve();
     }
   });
-};
