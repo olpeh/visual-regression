@@ -13,10 +13,10 @@
     "noUnusedLocals": true,
     "removeComments": true,
     "strictNullChecks": false,
-    "outDir": "build",
+    "outDir": "dist",
     "lib": ["es6", "es7", "dom"],
     "baseUrl": "src"
   },
   "include": ["src/**/*.ts", "test/**/*.{spec,test}.ts", "test/base.test.ts"],
-  "exclude": ["dist", "build", "node_modules", "coverage"]
+  "exclude": ["dist", "dist", "build", "node_modules", "coverage"]
 }

@@ -2,14 +2,14 @@
   "name": "visual-regression",
   "version": "0.1.0",
   "description": "Visual regression testing tool",
-  "main": "build/src/index",
+  "main": "dist/src/index",
   "scripts": {
     "start": "mocha test/ --timeout 35000",
     "pretest": "npm run lint && npm run build",
-    "test": "mocha build/test/ --timeout 35000",
+    "test": "mocha dist/test/ --timeout 35000",
     "build": "tsc",
     "dev": "npm run build && chokidar '**/*.ts' -c 'npm run build' --ignore node_modules",
-    "lint": "tslint {test,src}/*.ts"
+    "lint": "tslint {test,src}/**/*.ts"
   },
   "author": "Olavi Haapala",
   "license": "MIT",
