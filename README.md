@@ -60,4 +60,6 @@ You probably want to add the screenshot folder to your `.gitignore`.
 - During the next runs, it compares the screenshots with the "golden" screenshots and fails if there is too much difference
 - Diff pngs are generated for failed test cases and saved in the same folders
 
-![Sample output](screenshot.png 'Sample output after running')
+## Sample output
+
+![Sample output](visual-regression.gif 'Sample output after running')
