@@ -55,7 +55,7 @@ const viewportConfigs = [
 
 describe('olpe.fi looks ok', () => {
   const options: RegressionTestOptions = {
-      baseUrl: 'https://olpe.fi',
+      baseUrl: 'https://olpe.fi?you=can&have=queryParams&here',
       testPaths: [
         '/',
         '/projects/',

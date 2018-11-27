@@ -1,3 +1,4 @@
+import { format, UrlObject, parse } from 'url';
 const puppeteer = require('puppeteer');
 import { existsSync } from 'fs';
 
@@ -72,16 +73,17 @@ export const testVisualRegressions = (
     describe('on all given screen viewport sizes', () => {
       testPaths.forEach((path: TestPath) => {
         options.viewportConfigs.forEach((viewportConfig: Viewport) => {
-          const filePrefix = `${viewportConfig.width}x${viewportConfig.height}`;
-          it(`${options.baseUrl}${
-            path.path
-          } looks correct with screen size: ${filePrefix}`, async () => {
+          const filePrefix = `${viewportConfig.width}x${viewportConfig.height}`,
+            baseUrlObject: UrlObject = parse(options.baseUrl),
+            formattedUrl = format({
+              ...baseUrlObject,
+              pathname: path.path
+            });
+
+          it(`${formattedUrl} looks correct with screen size: ${filePrefix}`, async () => {
             page.setViewport(viewportConfig);
 
-            await page.goto(
-              `${options.baseUrl}${path.path}`,
-              navigationOptions
-            );
+            await page.goto(formattedUrl, navigationOptions);
             await takeScreenshot(
               page,
               screenshotDirPath,

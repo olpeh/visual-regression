@@ -34,7 +34,7 @@ const viewportConfigs = [
 
 describe('olpe.fi looks ok', () => {
   const options = {
-      baseUrl: 'https://olpe.fi',
+      baseUrl: 'https://olpe.fi?you=can&have=queryParams&here',
       testPaths: ['/', '/contact/'],
       viewportConfigs,
       baseScreenshotDirPath: 'visual-regression-screenshots',
