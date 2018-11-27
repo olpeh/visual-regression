@@ -34,14 +34,24 @@ const viewportConfigs = [
 
 describe('olpe.fi looks ok', () => {
   const options = {
-    baseUrl: 'https://olpe.fi',
-    testPaths: ['/', '/contact/'],
-    viewportConfigs,
-    baseScreenshotDirPath: 'visual-regression-screenshots',
-    goldenScreenshotDirName: 'golden',
-    testScreenshotDirName: 'test'
-  };
-  visualRegression.testVisualRegressions(options);
+      baseUrl: 'https://olpe.fi',
+      testPaths: ['/', '/contact/'],
+      viewportConfigs,
+      baseScreenshotDirPath: 'visual-regression-screenshots',
+      goldenScreenshotDirName: 'golden',
+      testScreenshotDirName: 'test'
+    },
+    // Optional, Puppeteer specific options
+    launchOptions = { headless: false },
+    navigationOptions = { waitUntil: 'networkidle2' },
+    screenshotOptions = { fullPage: true };
+
+  visualRegression.testVisualRegressions(
+    options,
+    launchOptions,
+    navigationOptions,
+    screenshotOptions
+  );
 });
 ```
 
@@ -63,3 +73,18 @@ You probably want to add the screenshot folder to your `.gitignore`.
 ## Sample output
 
 ![Sample output](visual-regression.gif 'Sample output after running')
+
+## Development
+
+Install dependencies: `yarn`
+
+Run tests: `npm test`
+
+## Publishing a new version:
+
+//TODO: Automate this process
+
+- Make the changes and test them
+- Bump the version in `package.json`
+- Run the build: `npm run build`
+- Publish: `npm publish`
