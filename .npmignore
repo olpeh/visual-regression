@@ -6,3 +6,4 @@ tslint.json
 yarn.lock
 package-lock.json
 .prettierrc
+visual-regression-screenshots
