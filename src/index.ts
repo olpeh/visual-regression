@@ -75,7 +75,7 @@ export const testVisualRegressions = (options: RegressionTestOptions) => {
               height: viewportConfig.height
             });
 
-            await page.goto(`${options.baseUrl}/${path.path}`);
+            await page.goto(`${options.baseUrl}${path.path}`);
             await takeScreenshot(
               page,
               screenshotDirPath,

@@ -4,7 +4,7 @@ import { mkdirSync, existsSync } from 'fs';
 export const generateTestPathsWithFolderNames = (paths: string[]): TestPath[] =>
   paths.map((path) => {
     const folderName =
-      path === '/'
+      path === '/' || path === ''
         ? 'frontpage'
         : path.replace(/[^a-z0-9]/gi, '_').toLowerCase();
     return {
