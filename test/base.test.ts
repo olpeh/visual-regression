@@ -1,4 +1,5 @@
 import { RegressionTestOptions, testVisualRegressions } from './../src/index';
+import { NavigationOptions, ScreenshotOptions, LaunchOptions } from 'puppeteer';
 
 //    What this configuration means is:
 //
@@ -7,64 +8,73 @@ import { RegressionTestOptions, testVisualRegressions } from './../src/index';
 //       "tiny"      "small"    "medium"      "large"
 //       <-480       481-768    769-1024       1025->
 
-// Probably stupid to use a "big enough height" here...
-const height = 2500;
+// minimun height will be ignored if fullPage is set to true (default)
+const minHeight = 800;
 const viewportConfigs = [
   {
     width: 380,
-    height
+    height: minHeight
   },
   {
     width: 480,
-    height
+    height: minHeight
   },
   {
     width: 481,
-    height
+    height: minHeight
   },
   {
     width: 768,
-    height
+    height: minHeight
   },
   {
     width: 769,
-    height
+    height: minHeight
   },
   {
     width: 1024,
-    height
+    height: minHeight
   },
   {
     width: 1025,
-    height
+    height: minHeight
   },
   {
     width: 1280,
-    height
+    height: minHeight
   },
   {
     width: 1600,
-    height
+    height: minHeight
   },
   {
     width: 1920,
-    height
+    height: minHeight
   }
 ];
 
 describe('olpe.fi looks ok', () => {
   const options: RegressionTestOptions = {
-    baseUrl: 'https://olpe.fi',
-    testPaths: [
-      '/',
-      '/projects/',
-      '/contact/',
-      '/2018/04/03/i-learned-frp-by-learning-cyclejs.html'
-    ],
-    viewportConfigs,
-    baseScreenshotDirPath: '/tmp/visual-regression',
-    goldenScreenshotDirName: 'golden',
-    testScreenshotDirName: 'test'
-  };
-  testVisualRegressions(options);
+      baseUrl: 'https://olpe.fi',
+      testPaths: [
+        '/',
+        '/projects/',
+        '/contact/',
+        '/2018/04/03/i-learned-frp-by-learning-cyclejs.html'
+      ],
+      viewportConfigs,
+      baseScreenshotDirPath: 'visual-regression-screenshots',
+      goldenScreenshotDirName: 'golden',
+      testScreenshotDirName: 'test'
+    },
+    launchOptions: LaunchOptions = { headless: true },
+    navigationOptions: NavigationOptions = { waitUntil: 'networkidle2' },
+    screenshotOptions: ScreenshotOptions = { fullPage: true };
+
+  testVisualRegressions(
+    options,
+    launchOptions,
+    navigationOptions,
+    screenshotOptions
+  );
 });

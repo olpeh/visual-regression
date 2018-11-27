@@ -1,7 +1,9 @@
 node_modules
 .env
 screenshots-golden*
+visual-regression-screenshots
 results-*
 test-dir
 build
 dist
+package-lock.json

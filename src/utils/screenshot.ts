@@ -2,16 +2,22 @@ import { createReadStream, createWriteStream } from 'fs';
 import { expect } from 'chai';
 import { PNG } from 'pngjs';
 import * as pixelmatch from 'pixelmatch';
+import { ScreenshotOptions } from 'puppeteer';
 
 export const takeScreenshot = async (
   page,
   screenshotDirPath: string,
   folderName: string,
-  filePrefix: string
+  filePrefix: string,
+  screenshotOptions?: ScreenshotOptions
 ) => {
-  await page.screenshot({
-    path: `${screenshotDirPath}/${folderName}/${filePrefix}.png`
-  });
+  const options: ScreenshotOptions = {
+    path: `${screenshotDirPath}/${folderName}/${filePrefix}.png`,
+    fullPage: true,
+    ...screenshotOptions
+  };
+
+  await page.screenshot(options);
 };
 
 export const compareScreenshots = (

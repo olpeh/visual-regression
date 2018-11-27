@@ -4,27 +4,33 @@ import { existsSync } from 'fs';
 import { takeScreenshot, compareScreenshots } from './utils/screenshot';
 
 import { generateTestPathsWithFolderNames, createFolders } from './utils/paths';
+import {
+  Viewport,
+  ScreenshotOptions,
+  NavigationOptions,
+  LaunchOptions
+} from 'puppeteer';
 
 export interface TestPath {
   path: string;
   folderName: string;
 }
 
-export interface ViewportConfig {
-  width: number;
-  height: number;
-}
-
 export interface RegressionTestOptions {
   baseUrl: string;
   testPaths: string[];
-  viewportConfigs: ViewportConfig[];
+  viewportConfigs: Viewport[];
   baseScreenshotDirPath: string;
   goldenScreenshotDirName: string;
   testScreenshotDirName: string;
 }
 
-export const testVisualRegressions = (options: RegressionTestOptions) => {
+export const testVisualRegressions = (
+  options: RegressionTestOptions,
+  launchOptions?: LaunchOptions,
+  navigationOptions?: NavigationOptions,
+  screenshotOptions?: ScreenshotOptions
+) => {
   const goldenScreenshotDirPath = `${options.baseScreenshotDirPath}/${
     options.goldenScreenshotDirName
   }`;
@@ -56,7 +62,7 @@ export const testVisualRegressions = (options: RegressionTestOptions) => {
 
     // This is ran before every test. It's where you start a clean browser.
     beforeEach(async () => {
-      browser = await puppeteer.launch();
+      browser = await puppeteer.launch(launchOptions);
       page = await browser.newPage();
     });
 
@@ -65,22 +71,23 @@ export const testVisualRegressions = (options: RegressionTestOptions) => {
 
     describe('on all given screen viewport sizes', () => {
       testPaths.forEach((path: TestPath) => {
-        options.viewportConfigs.forEach((viewportConfig) => {
+        options.viewportConfigs.forEach((viewportConfig: Viewport) => {
           const filePrefix = `${viewportConfig.width}x${viewportConfig.height}`;
           it(`${options.baseUrl}${
             path.path
           } looks correct with screen size: ${filePrefix}`, async () => {
-            page.setViewport({
-              width: viewportConfig.width,
-              height: viewportConfig.height
-            });
+            page.setViewport(viewportConfig);
 
-            await page.goto(`${options.baseUrl}${path.path}`);
+            await page.goto(
+              `${options.baseUrl}${path.path}`,
+              navigationOptions
+            );
             await takeScreenshot(
               page,
               screenshotDirPath,
               path.folderName,
-              filePrefix
+              filePrefix,
+              screenshotOptions
             );
 
             if (!firstRun) {
