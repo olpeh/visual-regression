@@ -24,7 +24,10 @@ export const compareScreenshots = (
   screenshotDirPath: string,
   folderName: string,
   filePrefix: string,
-  goldenDir: string
+  goldenDir: string,
+  compareHeight: boolean = true,
+  threshold: number = 0.5,
+  pixelLimit: number = 50000
 ) =>
   new Promise((resolve, reject) => {
     const img1 = createReadStream(
@@ -46,9 +49,11 @@ export const compareScreenshots = (
         return;
       }
 
-      // The files should be the same size.
-      expect(img1.width, 'image widths are the same').equal(img2.width);
-      expect(img1.height, 'image heights are the same').equal(img2.height);
+      if (compareHeight) {
+        // The files should be the same size.
+        expect(img1.width, 'image widths are the same').equal(img2.width);
+        expect(img1.height, 'image heights are the same').equal(img2.height);
+      }
 
       // Do the visual diff.
       const diff = new PNG({
@@ -62,12 +67,11 @@ export const compareScreenshots = (
         img1.width,
         img1.height,
         {
-          threshold: 0.5
+          threshold
         }
       );
 
       // Save the visual diff file if changed more than the limit
-      const pixelLimit = 50000;
       if (numDiffPixels >= pixelLimit) {
         diff
           .pack()

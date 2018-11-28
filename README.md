@@ -39,7 +39,11 @@ describe('olpe.fi looks ok', () => {
       viewportConfigs,
       baseScreenshotDirPath: 'visual-regression-screenshots',
       goldenScreenshotDirName: 'golden',
-      testScreenshotDirName: 'test'
+      testScreenshotDirName: 'test',
+      // These are optional and default values, here for demonstrational purposes
+      compareHeight: true,
+      threshold: 0.5,
+      pixelLimit: 50000
     },
     // Optional, Puppeteer specific options
     launchOptions = { headless: false },

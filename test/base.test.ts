@@ -65,7 +65,10 @@ describe('olpe.fi looks ok', () => {
       viewportConfigs,
       baseScreenshotDirPath: 'visual-regression-screenshots',
       goldenScreenshotDirName: 'golden',
-      testScreenshotDirName: 'test'
+      testScreenshotDirName: 'test',
+      compareHeight: false,
+      threshold: 0.5,
+      pixelLimit: 50000
     },
     launchOptions: LaunchOptions = { headless: true },
     navigationOptions: NavigationOptions = { waitUntil: 'networkidle2' },

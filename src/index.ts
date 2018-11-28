@@ -24,6 +24,9 @@ export interface RegressionTestOptions {
   baseScreenshotDirPath: string;
   goldenScreenshotDirName: string;
   testScreenshotDirName: string;
+  compareHeight?: boolean;
+  threshold?: number;
+  pixelLimit?: number;
 }
 
 export const testVisualRegressions = (
@@ -52,7 +55,10 @@ export const testVisualRegressions = (
     firstRun = true;
   }
 
-  describe('Screenshots are correct', () => {
+  const description = firstRun
+    ? 'Generating screenshots'
+    : 'Screenshots are correct';
+  describe(description, () => {
     let browser, page;
     const testPaths: TestPath[] = generateTestPathsWithFolderNames(
       options.testPaths
@@ -70,7 +76,10 @@ export const testVisualRegressions = (
     // This is ran after every test; clean up after your browser.
     afterEach(() => browser.close());
 
-    describe('on all given screen viewport sizes', () => {
+    const description2 = firstRun
+      ? 'for all given screen viewport sizes'
+      : 'on all given screen viewport sizes';
+    describe(description2, () => {
       testPaths.forEach((path: TestPath) => {
         options.viewportConfigs.forEach((viewportConfig: Viewport) => {
           const filePrefix = `${viewportConfig.width}x${viewportConfig.height}`,
@@ -80,7 +89,10 @@ export const testVisualRegressions = (
               pathname: path.path
             });
 
-          it(`${formattedUrl} looks correct with screen size: ${filePrefix}`, async () => {
+          const description3 = firstRun
+            ? `Generating screenshot for ${formattedUrl} with screen size: ${filePrefix}`
+            : `${formattedUrl} looks correct with screen size: ${filePrefix}`;
+          it(description3, async () => {
             page.setViewport(viewportConfig);
 
             await page.goto(formattedUrl, navigationOptions);
@@ -97,7 +109,10 @@ export const testVisualRegressions = (
                 screenshotDirPath,
                 path.folderName,
                 filePrefix,
-                goldenScreenshotDirPath
+                goldenScreenshotDirPath,
+                options.compareHeight,
+                options.threshold,
+                options.pixelLimit
               );
             }
           });
