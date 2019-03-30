@@ -53,14 +53,14 @@ const viewportConfigs = [
   }
 ];
 
-describe('olpe.fi looks ok', () => {
+describe('olavihaapala.fi looks ok', () => {
   const options: RegressionTestOptions = {
-      baseUrl: 'https://olpe.fi?you=can&have=queryParams&here',
+      baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
       testPaths: [
         '/',
         '/projects/',
         '/contact/',
-        '/2018/04/03/i-learned-frp-by-learning-cyclejs.html'
+        '/2018/11/11/visual-regression.html'
       ],
       viewportConfigs,
       baseScreenshotDirPath: 'visual-regression-screenshots',

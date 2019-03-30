@@ -36,10 +36,10 @@ const viewportConfigs = [
   }
 ];
 
-describe('olpe.fi looks ok', () => {
+describe('olavihaapala.fi looks ok', () => {
   const options = {
-      baseUrl: 'https://olpe.fi?you=can&have=queryParams&here',
-      testPaths: ['/', '/contact/'],
+      baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
+      testPaths: ['/', '/contact/', '/2018/11/11/visual-regression.html'],
       viewportConfigs,
       baseScreenshotDirPath: 'visual-regression-screenshots',
       goldenScreenshotDirName: 'golden',
