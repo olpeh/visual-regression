@@ -42,7 +42,7 @@ export const testVisualRegressions = (
     options.testScreenshotDirName
   }`;
   let firstRun = false;
-  console.log(`Going to run tests with the following options`, { options });
+  console.log(`Going to run tests with the following options`, { ...options });
 
   // Make sure the base dir for screenshots exists
   if (!existsSync(goldenScreenshotDirPath)) {
