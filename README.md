@@ -12,7 +12,7 @@ This tool may be useful to be run right before and right after a deployment that
 
 ## Usage
 
-- Install it: `npm i visual-regression` or `yarn add visual-regression`
+- Install it: `npm i -D visual-regression` or `yarn add -D visual-regression`
 
 After that, you can import it and test for visual regression.
 
