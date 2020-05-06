@@ -13,44 +13,44 @@ const minHeight = 800;
 const viewportConfigs = [
   {
     width: 380,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 480,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 481,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 768,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 769,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 1024,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 1025,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 1280,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 1600,
-    height: minHeight
+    height: minHeight,
   },
   {
     width: 1920,
-    height: minHeight
-  }
+    height: minHeight,
+  },
 ];
 
 describe('olavihaapala.fi looks ok', () => {
@@ -60,15 +60,9 @@ describe('olavihaapala.fi looks ok', () => {
         '/',
         '/projects/',
         '/contact/',
-        '/2018/11/11/visual-regression.html'
+        '/2018/11/11/visual-regression.html',
       ],
       viewportConfigs,
-      baseScreenshotDirPath: 'visual-regression-screenshots',
-      goldenScreenshotDirName: 'golden',
-      testScreenshotDirName: 'test',
-      compareHeight: false,
-      threshold: 0.5,
-      pixelLimit: 50000
     },
     launchOptions: LaunchOptions = { headless: true },
     navigationOptions: NavigationOptions = { waitUntil: 'networkidle2' },
