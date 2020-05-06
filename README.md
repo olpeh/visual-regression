@@ -38,25 +38,20 @@ const viewportConfigs = [
 
 describe('olavihaapala.fi looks ok', () => {
   const options = {
-      baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
-      testPaths: [
-        '/',
-        '/projects/',
-        '/contact/',
-        '/2018/11/11/visual-regression.html',
-      ],
-      viewportConfigs,
-    },
-    launchOptions = { headless: true },
-    navigationOptions = { waitUntil: 'networkidle2' },
-    screenshotOptions = { fullPage: true };
+    baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
+    testPaths: [
+      '/',
+      '/projects/',
+      '/contact/',
+      '/2018/11/11/visual-regression.html',
+    ],
+    viewportConfigs,
+    launchOptions: { headless: true },
+    navigationOptions: { waitUntil: 'networkidle2' },
+    screenshotOptions: { fullPage: true };
+  };
 
-  testVisualRegressions(
-    options,
-    launchOptions,
-    navigationOptions,
-    screenshotOptions
-  );
+  testVisualRegressions(options);
 });
 ```
 
