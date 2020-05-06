@@ -51,7 +51,7 @@ describe('olavihaapala.fi looks ok', () => {
     screenshotOptions: { fullPage: true };
   };
 
-  testVisualRegressions(options);
+  visualRegression.testVisualRegressions(options);
 });
 ```
 
