@@ -60,24 +60,20 @@ describe('olavihaapala.fi looks ok', () => {
 });
 ```
 
-And you would run it with a test runner (here we use mocca):
+And you would run it with jest:
 
 ```javascript
- "test": "mocha test/ --timeout 35000",
+ "test": "jest",
 ```
-
-You probably want to add the screenshot folder to your `.gitignore`.
 
 ## How it works
 
 - visual-regression uses puppeteer for opening a page and capturing a screenshot of the contents
-- On the first time it records the "golden" screenshots
-- During the next runs, it compares the screenshots with the "golden" screenshots and fails if there is too much difference
-- Diff pngs are generated for failed test cases and saved in the same folders
+- It uses [jest-image-snapshot](https://github.com/americanexpress/jest-image-snapshot) for checking that the screenshots match the previous snapshots
 
 ## Sample output
 
-![Sample output](visual-regression.gif 'Sample output after running')
+![Sample output](screenshot.png 'Sample output after running')
 
 ## Development
 
