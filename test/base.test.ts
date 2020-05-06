@@ -1,5 +1,4 @@
 import { RegressionTestOptions, testVisualRegressions } from './../src/index';
-import { NavigationOptions, ScreenshotOptions, LaunchOptions } from 'puppeteer';
 
 //    What this configuration means is:
 //
@@ -55,23 +54,18 @@ const viewportConfigs = [
 
 describe('olavihaapala.fi looks ok', () => {
   const options: RegressionTestOptions = {
-      baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
-      testPaths: [
-        '/',
-        '/projects/',
-        '/contact/',
-        '/2018/11/11/visual-regression.html',
-      ],
-      viewportConfigs,
-    },
-    launchOptions: LaunchOptions = { headless: true },
-    navigationOptions: NavigationOptions = { waitUntil: 'networkidle2' },
-    screenshotOptions: ScreenshotOptions = { fullPage: true };
+    baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
+    testPaths: [
+      '/',
+      '/projects/',
+      '/contact/',
+      '/2018/11/11/visual-regression.html',
+    ],
+    viewportConfigs,
+    launchOptions: { headless: true },
+    navigationOptions: { waitUntil: 'networkidle2' },
+    screenshotOptions: { fullPage: true },
+  };
 
-  testVisualRegressions(
-    options,
-    launchOptions,
-    navigationOptions,
-    screenshotOptions
-  );
+  testVisualRegressions(options);
 });

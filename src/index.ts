@@ -21,14 +21,12 @@ export interface RegressionTestOptions {
   baseUrl: string;
   testPaths: string[];
   viewportConfigs: Viewport[];
+  launchOptions?: LaunchOptions;
+  navigationOptions?: NavigationOptions;
+  screenshotOptions?: ScreenshotOptions;
 }
 
-export const testVisualRegressions = (
-  options: RegressionTestOptions,
-  launchOptions?: LaunchOptions,
-  navigationOptions?: NavigationOptions,
-  screenshotOptions?: ScreenshotOptions
-) => {
+export const testVisualRegressions = (options: RegressionTestOptions) => {
   console.log(`Going to run tests with the following options`, { ...options });
 
   describe('Screenshots are correct', () => {
@@ -36,7 +34,7 @@ export const testVisualRegressions = (
 
     // This is ran before every test. It's where you start a clean browser.
     beforeEach(async () => {
-      browser = await puppeteer.launch(launchOptions);
+      browser = await puppeteer.launch(options.launchOptions);
       page = await browser.newPage();
     });
 
@@ -56,8 +54,8 @@ export const testVisualRegressions = (
           it(`${formattedUrl} looks correct with screen size: ${filePrefix}`, async () => {
             page.setViewport(viewportConfig);
 
-            await page.goto(formattedUrl, navigationOptions);
-            const image = await page.screenshot(screenshotOptions);
+            await page.goto(formattedUrl, options.navigationOptions);
+            const image = await page.screenshot(options.screenshotOptions);
             expect(image).toMatchImageSnapshot();
           });
         });
