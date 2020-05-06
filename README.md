@@ -24,37 +24,34 @@ const visualRegression = require('visual-regression');
 const viewportConfigs = [
   {
     width: 480,
-    height: 800
+    height: 800,
   },
   {
     width: 800,
-    height: 600
+    height: 600,
   },
   {
     width: 1024,
-    height: 1024
-  }
+    height: 1024,
+  },
 ];
 
 describe('olavihaapala.fi looks ok', () => {
   const options = {
       baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
-      testPaths: ['/', '/contact/', '/2018/11/11/visual-regression.html'],
+      testPaths: [
+        '/',
+        '/projects/',
+        '/contact/',
+        '/2018/11/11/visual-regression.html',
+      ],
       viewportConfigs,
-      baseScreenshotDirPath: 'visual-regression-screenshots',
-      goldenScreenshotDirName: 'golden',
-      testScreenshotDirName: 'test',
-      // These are optional and default values, here for demonstrational purposes
-      compareHeight: true,
-      threshold: 0.5,
-      pixelLimit: 50000
     },
-    // Optional, Puppeteer specific options
-    launchOptions = { headless: false },
+    launchOptions = { headless: true },
     navigationOptions = { waitUntil: 'networkidle2' },
     screenshotOptions = { fullPage: true };
 
-  visualRegression.testVisualRegressions(
+  testVisualRegressions(
     options,
     launchOptions,
     navigationOptions,
