@@ -26,7 +26,7 @@ export interface RegressionTestOptions {
   screenshotOptions?: ScreenshotOptions;
 }
 
-export const testVisualRegressions = (options: RegressionTestOptions) => {
+export const run = (options: RegressionTestOptions) => {
   console.log(`Going to run tests with the following options`, { ...options });
 
   describe('Screenshots are correct', () => {

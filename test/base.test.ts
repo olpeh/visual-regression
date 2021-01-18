@@ -1,4 +1,4 @@
-import { RegressionTestOptions, testVisualRegressions } from './../src/index';
+import { RegressionTestOptions, run } from './../src/index';
 
 //    What this configuration means is:
 //
@@ -63,5 +63,5 @@ describe('example.com looks ok', () => {
     screenshotOptions: { fullPage: true },
   };
 
-  testVisualRegressions(options);
+  run(options);
 });

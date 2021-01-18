@@ -36,22 +36,18 @@ const viewportConfigs = [
   },
 ];
 
-describe('olavihaapala.fi looks ok', () => {
-  const options = {
-    baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
-    testPaths: [
-      '/',
-      '/projects/',
-      '/contact/',
-      '/2018/11/11/visual-regression.html',
-    ],
+describe('example.com looks ok', () => {
+  const options: RegressionTestOptions = {
+    // Let's use a page that is not very likely to change visually over time
+    baseUrl: 'http://example.com',
+    testPaths: ['/'],
     viewportConfigs,
     launchOptions: { headless: true },
     navigationOptions: { waitUntil: 'networkidle2' },
-    screenshotOptions: { fullPage: true };
+    screenshotOptions: { fullPage: true },
   };
 
-  visualRegression.testVisualRegressions(options);
+  visualRegression.run(options);
 });
 ```
 
