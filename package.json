@@ -1,6 +1,6 @@
 {
   "name": "visual-regression",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Visual regression testing tool",
   "main": "dist/src/index",
   "scripts": {
