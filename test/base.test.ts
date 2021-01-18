@@ -52,15 +52,11 @@ const viewportConfigs = [
   },
 ];
 
-describe('olavihaapala.fi looks ok', () => {
+describe('example.com looks ok', () => {
   const options: RegressionTestOptions = {
-    baseUrl: 'https://olavihaapala.fi?you=can&have=queryParams&here',
-    testPaths: [
-      '/',
-      '/projects/',
-      '/contact/',
-      '/2018/11/11/visual-regression.html',
-    ],
+    // Let's use a page that is not very likely to change visually over time
+    baseUrl: 'http://example.com',
+    testPaths: ['/'],
     viewportConfigs,
     launchOptions: { headless: true },
     navigationOptions: { waitUntil: 'networkidle2' },
